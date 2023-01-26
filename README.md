@@ -1,8 +1,9 @@
-# Welcome to Remix!
+# Welcome to Remix SSO 🔐!
 
-This is a very basic example of a simple Remix app using the Remix App Server.
+This is a very basic example of a simple Remix app that implements SSO authentication using the Remix App Server and [Clerk](clerk.dev).
 
 - [Remix Docs](https://remix.run/docs)
+- [Blog Post](#)
 
 ## Development
 
@@ -28,9 +29,3 @@ Then run the app in production mode:
 ```sh
 npm start
 ```
-
-## Preview
-
-Open this example on [CodeSandbox](https://codesandbox.com):
-
-[![Open in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/remix-run/examples/tree/main/basic)
