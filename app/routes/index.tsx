@@ -40,6 +40,7 @@ export const loader = async () => {
         to: "demos/params",
         name: "URL Params and Error Boundaries",
       },
+      { to: "demos/protected", name: "Protected route" },
     ],
   };
 

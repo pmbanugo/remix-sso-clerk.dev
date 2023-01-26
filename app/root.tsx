@@ -12,6 +12,18 @@ import {
 } from "@remix-run/react";
 import * as React from "react";
 
+// Add Clerk imports
+import type { LoaderFunction } from "@remix-run/node";
+import { rootAuthLoader } from "@clerk/remix/ssr.server";
+import {
+  ClerkApp,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  ClerkCatchBoundary,
+} from "@clerk/remix";
+
 import deleteMeRemixStyles from "~/styles/demos/remix.css";
 import globalStylesUrl from "~/styles/global.css";
 import darkStylesUrl from "~/styles/dark.css";
@@ -41,12 +53,15 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+// Define and export your loader
+export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+
 /**
  * The root module's default export is a component that renders the current
  * route via the `<Outlet />` component. Think of this as the global layout
  * component for your app.
  */
-export default function App() {
+function App() {
   return (
     <Document>
       <Layout>
@@ -55,6 +70,8 @@ export default function App() {
     </Document>
   );
 }
+
+export default ClerkApp(App);
 
 function Document({
   children,
@@ -100,6 +117,14 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
               <li>
                 <a href="https://github.com/remix-run/remix">GitHub</a>
               </li>
+              <li>
+                <SignedOut>
+                  <SignInButton mode="modal" />
+                </SignedOut>
+                <SignedIn>
+                  <SignOutButton />
+                </SignedIn>
+              </li>
             </ul>
           </nav>
         </div>
@@ -116,7 +141,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-export function CatchBoundary() {
+function CatchAll() {
   const caught = useCatch();
 
   let message;
@@ -150,6 +175,8 @@ export function CatchBoundary() {
     </Document>
   );
 }
+
+export const CatchBoundary = ClerkCatchBoundary(CatchAll);
 
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);

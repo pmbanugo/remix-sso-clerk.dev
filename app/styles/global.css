@@ -96,3 +96,14 @@ input:where([type="search"]) {
   margin-right: auto;
   margin-left: auto;
 }
+
+button {
+  background-color: var(--color-links);
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
